@@ -9,7 +9,7 @@ st.markdown("""
 2. Select a movie from the suggestions.
 3. Click **"Show Recommendations"** to see movies similar to the selected one.
 
-💡 Make sure you enter a valid movie from the list.
+💡 Make sure you enter a valid movie from the list. You will be able to get five similar movies to your chosen movie for you to watch..
 """)
 
 # Use selectbox for auto-suggestion
