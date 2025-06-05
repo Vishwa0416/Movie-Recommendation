@@ -1,21 +1,25 @@
 import streamlit as st
-from recommendation_engine import recommend
+from recommendation_engine import recommend, movie_titles
 
-st.set_page_config(page_title="🎬 Movie Recommender", layout="centered")
+st.title('🎬 Movie Recommendation System')
 
-st.title("🎥 Movie Recommendation System")
-st.write("Enter your favorite movie and get 5 similar movie suggestions!")
+st.markdown("""
+### 📌 How to Use:
+1. Start typing a movie name in the search box.
+2. Select a movie from the suggestions.
+3. Click **"Show Recommendations"** to see movies similar to the selected one.
 
-movie_name = st.text_input("Enter a movie name:")
+💡 Make sure you enter a valid movie from the list.
+""")
 
-if st.button("Recommend"):
-    if movie_name.strip() == "":
-        st.warning("Please enter a movie name.")
+# Use selectbox for auto-suggestion
+selected_movie = st.selectbox("Search for a movie", movie_titles)
+
+if st.button('Show Recommendations'):
+    recommendations = recommend(selected_movie)
+    if recommendations:
+        st.subheader("Recommended Movies:")
+        for movie in recommendations:
+            st.write(f"🎥 {movie}")
     else:
-        recommendations = recommend(movie_name)
-        if recommendations:
-            st.subheader("📽️ Recommended Movies:")
-            for i, rec in enumerate(recommendations, 1):
-                st.write(f"{i}. {rec}")
-        else:
-            st.error("Movie not found in dataset.")
+        st.warning("No recommendations found.")

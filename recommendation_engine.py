@@ -2,20 +2,25 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load dataset
+# Load and preprocess the dataset
 movies = pd.read_csv("tmdb_5000_movies.csv")
 
-# Use only available columns
+# Keep only the required columns
 movies = movies[['title', 'genres', 'keywords', 'overview']]
 movies.dropna(inplace=True)
 
-# Combine into a single 'tags' column
+# Combine relevant text fields
 movies['tags'] = movies['overview'].astype(str) + " " + movies['genres'].astype(str) + " " + movies['keywords'].astype(str)
 
-# Vectorize
+# Create feature vectors
 cv = CountVectorizer(max_features=5000, stop_words='english')
 vectors = cv.fit_transform(movies['tags']).toarray()
+
+# Compute similarity
 similarity = cosine_similarity(vectors)
+
+# Store titles separately for the UI
+movie_titles = movies['title'].values
 
 # Recommendation function
 def recommend(movie):
