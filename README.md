@@ -36,14 +36,6 @@ An intelligent and interactive **movie recommendation system** built using **Pyt
 
 ---
 
-## 📸 Demo
-
-> Select a movie title and get 5 similar movie recommendations with posters.
-
-![movie-recommender-demo](assets/demo_ui.png)
-
----
-
 ## 🤝 Contributions
 Have suggestions or want to add new features? Contributions are welcome!
 
